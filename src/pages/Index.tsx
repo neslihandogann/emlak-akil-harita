@@ -2,7 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import PredictionForm from "@/components/PredictionForm";
-import MapSection from "@/components/MapSection";
+import InteractiveMap from "@/components/InteractiveMap";
+import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Footer from "@/components/Footer";
 
@@ -14,7 +15,8 @@ const Index = () => {
         <Hero />
         <Features />
         <PredictionForm />
-        <MapSection />
+        <InteractiveMap />
+        <About />
         <Stats />
       </main>
       <Footer />
