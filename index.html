@@ -1,26 +1,240 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EmlakAI - Yapay Zeka Destekli Emlak Fiyat Tahmini</title>
-    <meta name="description" content="Türkiye'nin en gelişmiş yapay zeka destekli emlak fiyat tahmin platformu. Derin öğrenme algoritmaları ile veriye dayalı emlak analizi." />
-    <meta name="author" content="EmlakAI" />
-    <meta name="keywords" content="emlak fiyat tahmini, yapay zeka, derin öğrenme, gayrimenkul analizi, Türkiye emlak" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burak & Nesli | BN Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,800;1,200;1,800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- React & Babel for Browser Rendering -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <meta property="og:title" content="EmlakAI - Yapay Zeka Destekli Emlak Fiyat Tahmini" />
-    <meta property="og:description" content="Türkiye'nin en gelişmiş yapay zeka destekli emlak fiyat tahmin platformu." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #020202;
+            color: white;
+            margin: 0;
+            cursor: none;
+            overflow-x: hidden;
+        }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="EmlakAI - Yapay Zeka Destekli Emlak Fiyat Tahmini" />
-    <meta name="twitter:description" content="Türkiye'nin en gelişmiş yapay zeka destekli emlak fiyat tahmin platformu." />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+        .tracking-tighter { letter-spacing: -0.06em; }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #020202; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-  <body>
+        @keyframes pulse-custom {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .animate-portal { animation: pulse-custom 8s infinite ease-in-out; }
+
+        .mix-blend-difference { mix-blend-mode: difference; }
+    </style>
+</head>
+<body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const App = () => {
+            const [activePage, setActivePage] = useState('home');
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+            useEffect(() => {
+                const handleMouseMove = (e) => {
+                    setMousePos({ x: e.clientX, y: e.clientY });
+                };
+                window.addEventListener('mousemove', handleMouseMove);
+                return () => window.removeEventListener('mousemove', handleMouseMove);
+            }, []);
+
+            useEffect(() => {
+                window.scrollTo(0, 0);
+            }, [activePage]);
+
+            const burakProjects = [
+                { id: "b1", title: "NEURAL CANVAS", tag: "AI GENERATIVE ART", desc: "İnsan duygularını gerçek zamanlı analiz ederek soyut görsel dünyalar yaratan yapay zeka motoru.", stats: ["98% Duygu Analizi", "Real-time Render"], color: "from-orange-500/40" },
+                { id: "b2", title: "VIRTUAL COUTURE", tag: "BRAND IDENTITY", desc: "Metaverse odaklı moda markaları için tasarlanmış, fizik kurallarını zorlayan dijital kampanya serisi.", stats: ["3.2M Erişim", "Sıfır Atık Tasarım"], color: "from-purple-500/40" },
+                { id: "b3", title: "OXY GEN", tag: "SOCIAL STRATEGY", desc: "Sürdürülebilirlik odaklı topluluklar için AI destekli içerik üretim ve etkileşim ekosistemi.", stats: ["45k+ Topluluk", "Organik Büyüme"], color: "from-pink-500/40" }
+            ];
+
+            const nesliProjects = [
+                { id: "n1", title: "CORE PROTOCOL", tag: "SYSTEM ARCHITECTURE", desc: "Saniyede milyonlarca işlemi 10ms altında gecikmeyle işleyen dağıtık çekirdek sistemi.", stats: ["99.999% Çalışma Süresi", "Rust-based Engine"], color: "from-blue-500/40" },
+                { id: "n2", title: "SENTINEL OS", tag: "CYBER SECURITY", desc: "Yapay zeka tabanlı, proaktif tehdit algılama ve otomatik yama yönetim platformu.", stats: ["Zero-Day Kalkanı", "AI Savunma"], color: "from-emerald-500/40" },
+                { id: "n3", title: "DATA WAVE", tag: "FULL STACK / CLOUD", desc: "Karmaşık veri setlerini WebGL kullanarak 3D uzayda görselleştiren ölçeklenebilir bulut çözümü.", stats: ["1PB Veri Senkronu", "Serverless Mimari"], color: "from-cyan-500/40" }
+            ];
+
+            const CustomCursor = () => (
+                <div 
+                    className="fixed w-8 h-8 rounded-full border border-white/30 pointer-events-none z-[9999] transition-transform duration-150 ease-out hidden md:block mix-blend-difference"
+                    style={{ left: mousePos.x, top: mousePos.y, transform: `translate(-50%, -50%) scale(${isMenuOpen ? 2 : 1})` }}
+                />
+            );
+
+            const Navigation = () => (
+                <nav className="fixed top-0 left-0 w-full z-[100] px-8 py-10 flex justify-between items-center">
+                    <div className="flex items-center gap-4 cursor-pointer group" onClick={() => setActivePage('home')}>
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+                            <i data-lucide="zap" className="w-5 h-5 text-black fill-black"></i>
+                        </div>
+                        <div className="font-black text-xl tracking-tighter text-white uppercase italic">BN<span className="opacity-40">.STUDIO</span></div>
+                    </div>
+                    
+                    <div className="hidden md:flex bg-white/5 backdrop-blur-2xl border border-white/10 rounded-full px-8 py-3 space-x-12 font-bold text-[10px] tracking-[0.3em] uppercase">
+                        <button onClick={() => setActivePage('home')} className={`hover:text-white transition-colors ${activePage === 'home' ? 'text-white' : 'text-white/40'}`}>Giriş</button>
+                        <button onClick={() => setActivePage('burak')} className={`hover:text-orange-500 transition-colors ${activePage === 'burak' ? 'text-orange-500' : 'text-white/40'}`}>Burak</button>
+                        <button onClick={() => setActivePage('nesli')} className={`hover:text-blue-400 transition-colors ${activePage === 'nesli' ? 'text-blue-400' : 'text-white/40'}`}>Nesli</button>
+                    </div>
+
+                    <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        {isMenuOpen ? <i data-lucide="x" size="32"></i> : <i data-lucide="menu" size="32"></i>}
+                    </button>
+
+                    <div className={`fixed inset-0 bg-black z-[-1] flex flex-col items-center justify-center gap-8 transition-all duration-700 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}>
+                        <button className="text-5xl font-black italic hover:text-orange-500" onClick={() => {setActivePage('burak'); setIsMenuOpen(false);}}>BURAK</button>
+                        <button className="text-5xl font-black italic hover:text-blue-400" onClick={() => {setActivePage('nesli'); setIsMenuOpen(false);}}>NESLI</button>
+                    </div>
+                </nav>
+            );
+
+            const Home = () => (
+                <div className="min-h-screen bg-[#020202] text-white flex flex-col md:flex-row items-center justify-center relative overflow-hidden">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-orange-600/20 via-blue-600/20 to-purple-600/20 rounded-full blur-[160px] animate-portal pointer-events-none" />
+
+                    <div className="w-full h-full flex flex-col md:flex-row relative z-10">
+                        <div className="flex-1 flex flex-col justify-center items-center group cursor-pointer border-b md:border-b-0 md:border-r border-white/5 p-12 transition-all duration-700 hover:bg-white/[0.02]" onClick={() => setActivePage('burak')}>
+                            <div className="relative mb-8">
+                                <div className="absolute inset-0 bg-orange-500 blur-3xl opacity-0 group-hover:opacity-40 transition-opacity" />
+                                <i data-lucide="palette" className="w-16 h-16 text-orange-500 relative z-10 animate-bounce"></i>
+                            </div>
+                            <h2 className="text-7xl md:text-9xl font-black italic tracking-tighter group-hover:scale-110 transition-transform duration-700 uppercase">CREATIVE</h2>
+                            <p className="mt-4 text-white/40 font-mono tracking-widest uppercase text-xs">Burak — AI Tasarım Uzmanı</p>
+                        </div>
+
+                        <div className="flex-1 flex flex-col justify-center items-center group cursor-pointer p-12 transition-all duration-700 hover:bg-white/[0.02]" onClick={() => setActivePage('nesli')}>
+                            <div className="relative mb-8">
+                                <div className="absolute inset-0 bg-blue-500 blur-3xl opacity-0 group-hover:opacity-40 transition-opacity" />
+                                <i data-lucide="code-2" className="w-16 h-16 text-blue-400 relative z-10 animate-pulse"></i>
+                            </div>
+                            <h2 className="text-7xl md:text-9xl font-black italic tracking-tighter group-hover:scale-110 transition-transform duration-700 uppercase">ENGINEER</h2>
+                            <p className="mt-4 text-white/40 font-mono tracking-widest uppercase text-xs">Nesli — Yazılım Mimarı</p>
+                        </div>
+                    </div>
+
+                    <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 text-[10px] font-mono tracking-[0.5em] opacity-40">
+                        <span>KURULUŞ 2026</span>
+                        <div className="w-1 h-1 bg-white rounded-full" />
+                        <span>İSTANBUL / TÜRKİYE</span>
+                    </div>
+                </div>
+            );
+
+            const ProfilePage = ({ name, role, colorClass, data, bio, links, themeColor }) => (
+                <div className="min-h-screen bg-[#020202] text-white pt-48 pb-20 px-8 md:px-20 relative">
+                    <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl ${themeColor} opacity-20 blur-[120px] pointer-events-none`} />
+                    <div className="max-w-[1600px] mx-auto">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-end mb-32">
+                            <div className="lg:col-span-8">
+                                <div className={`mb-6 font-mono text-[10px] tracking-[0.6em] uppercase ${colorClass}`}>{role}</div>
+                                <h1 className="text-8xl md:text-[14rem] font-black leading-[0.8] tracking-tighter uppercase italic">
+                                    {name}<span className={colorClass}>.</span>
+                                </h1>
+                            </div>
+                            <div className="lg:col-span-4 pb-4">
+                                <p className="text-xl md:text-2xl text-white/40 font-medium leading-relaxed mb-8">{bio}</p>
+                                <div className="flex gap-4">
+                                    {links.map((link, i) => (
+                                        <a key={i} href={link.url} className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                                            <i data-lucide={link.iconName}></i>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {data.map((item) => (
+                                <div key={item.id} className="group relative">
+                                    <div className={`absolute inset-0 bg-gradient-to-b ${item.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2rem]`} />
+                                    <div className="relative bg-white/5 backdrop-blur-3xl border border-white/5 p-10 rounded-[2rem] h-[500px] flex flex-col justify-between overflow-hidden">
+                                        <div className="absolute top-0 right-0 p-8">
+                                            <i data-lucide="arrow-up-right" className="w-8 h-8 text-white/20 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"></i>
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] font-mono tracking-[0.3em] text-white/40 mb-4 uppercase">{item.tag}</div>
+                                            <h3 className="text-4xl font-black italic tracking-tighter mb-6">{item.title}</h3>
+                                            <p className="text-white/60 leading-relaxed font-medium">{item.desc}</p>
+                                        </div>
+                                        <div className="flex flex-wrap gap-3">
+                                            {item.stats.map((stat, i) => (
+                                                <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">{stat}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-40 p-20 rounded-[3rem] bg-white/[0.02] border border-white/5 flex flex-col items-center text-center relative overflow-hidden group">
+                            <div className={`absolute inset-0 bg-gradient-to-r ${themeColor} opacity-0 group-hover:opacity-5 transition-opacity duration-1000`} />
+                            <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-12 uppercase">YENİ NESİL <br/> İŞBİRLİĞİ</h2>
+                            <button className="bg-white text-black px-12 py-6 rounded-full font-black text-xl hover:scale-105 transition-transform flex items-center gap-4 uppercase">
+                                HAYDİ KONUŞALIM <i data-lucide="mouse-pointer-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            useEffect(() => { lucide.createIcons(); }, [activePage]);
+
+            return (
+                <div className="selection:bg-white selection:text-black">
+                    <CustomCursor />
+                    <Navigation />
+                    {activePage === 'home' && <Home />}
+                    {activePage === 'burak' && (
+                        <ProfilePage 
+                            name="BURAK" role="CREATIVE AI DIRECTOR" colorClass="text-orange-500" themeColor="from-orange-600"
+                            bio="Tasarım ve yapay zekayı sadece bir araç değil, yeni dünyalar kurmak için birer dil olarak kullanıyorum."
+                            data={burakProjects}
+                            links={[{ iconName: "instagram", url: "#" }, { iconName: "linkedin", url: "#" }, { iconName: "globe", url: "#" }]}
+                        />
+                    )}
+                    {activePage === 'nesli' && (
+                        <ProfilePage 
+                            name="NESLI" role="SENIOR CORE ENGINEER" colorClass="text-blue-400" themeColor="from-blue-600"
+                            bio="Karmaşıklığı zarafete dönüştürüyorum. Performansın sanatla, sistemin hızla buluştuğu noktada sürdürülebilir mimariler inşa ediyorum."
+                            data={nesliProjects}
+                            links={[{ iconName: "github", url: "#" }, { iconName: "linkedin", url: "#" }, { iconName: "terminal", url: "#" }]}
+                        />
+                    )}
+                    <footer className="bg-black py-20 border-t border-white/5 flex flex-col items-center gap-8">
+                        <div className="text-white/20 font-black text-4xl italic tracking-tighter uppercase">B&N STUDIO</div>
+                        <div className="flex gap-12 text-[9px] font-mono tracking-[0.4em] text-white/30 uppercase text-center flex-wrap justify-center">
+                            <span>© 2026 AI CO-DESIGNED</span>
+                            <span>GİZLİLİK PROTOKOLÜ</span>
+                            <span>SİSTEM DURUMU: OPTİMAL</span>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
 </html>
